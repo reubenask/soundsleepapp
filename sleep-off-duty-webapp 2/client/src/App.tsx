@@ -1,7 +1,8 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, Router } from "wouter";
+import { useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
@@ -17,9 +18,23 @@ import MorningLogPage from "./pages/MorningLogPage";
 import WeeklyReviewPage from "./pages/WeeklyReviewPage";
 import ASMRPage from "./pages/ASMRPage";
 
-function Router() {
+// Custom hook to get base-aware location
+const useBaseLocation = () => {
+  const [location] = useLocation();
+  const basePath = '/soundsleepapp';
+  
+  // Strip base path from current location for routing
+  if (location.startsWith(basePath)) {
+    return location.slice(basePath.length) || '/';
+  }
+  return location;
+};
+
+function AppRouter() {
+  const location = useBaseLocation();
+  
   return (
-    <Switch>
+    <Switch location={location}>
       <Route path="/" component={SplashPage} />
       <Route path="/status" component={StatusSelectPage} />
       <Route path="/home" component={HomePage} />
@@ -42,7 +57,9 @@ function App() {
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <Router base="/soundsleepapp">
+            <AppRouter />
+          </Router>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
