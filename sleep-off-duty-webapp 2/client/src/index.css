@@ -1,0 +1,323 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* 
+ * 睡眠下班 Design System
+ * Philosophy: 深夜安静 · 低压力 · 不评判 · 夜间友好
+ * Night palette: Deep Navy #101827 + Warm Moon #C9A66B
+ * Morning palette: Warm Ivory #F7F1E5 + Soft Green #91BFA3
+ * Font: Noto Serif SC (display) + Noto Sans SC (body)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 8px);
+  --radius-2xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* Night theme (default) - Deep Navy */
+:root {
+  --radius: 1rem;
+  --background: oklch(0.135 0.025 240);
+  --foreground: oklch(0.92 0.01 65);
+  --card: oklch(0.17 0.022 240);
+  --card-foreground: oklch(0.92 0.01 65);
+  --popover: oklch(0.17 0.022 240);
+  --popover-foreground: oklch(0.92 0.01 65);
+  /* Warm Moon gold as primary */
+  --primary: oklch(0.72 0.09 75);
+  --primary-foreground: oklch(0.135 0.025 240);
+  --secondary: oklch(0.22 0.02 240);
+  --secondary-foreground: oklch(0.78 0.01 65);
+  --muted: oklch(0.20 0.018 240);
+  --muted-foreground: oklch(0.60 0.015 240);
+  --accent: oklch(0.22 0.02 240);
+  --accent-foreground: oklch(0.92 0.01 65);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.72 0.09 75);
+  --chart-1: oklch(0.72 0.09 75);
+  --chart-2: oklch(0.60 0.08 160);
+  --chart-3: oklch(0.50 0.06 240);
+  --chart-4: oklch(0.65 0.07 200);
+  --chart-5: oklch(0.55 0.05 280);
+  --sidebar: oklch(0.17 0.022 240);
+  --sidebar-foreground: oklch(0.92 0.01 65);
+  --sidebar-primary: oklch(0.72 0.09 75);
+  --sidebar-primary-foreground: oklch(0.135 0.025 240);
+  --sidebar-accent: oklch(0.22 0.02 240);
+  --sidebar-accent-foreground: oklch(0.92 0.01 65);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: oklch(0.72 0.09 75);
+
+  /* Custom sleep app tokens */
+  --night-bg: #101827;
+  --night-card: #16202F;
+  --night-card-2: #1C2A3E;
+  --moon-gold: #C9A66B;
+  --moon-gold-light: #E0C48A;
+  --morning-bg: #F7F1E5;
+  --morning-text: #283044;
+  --soft-green: #91BFA3;
+  --text-primary: #EAE7DF;
+  --text-secondary: #AEB7CC;
+  --text-muted: #6E7890;
+}
+
+/* Morning theme class */
+.morning-theme {
+  --background: oklch(0.97 0.015 80);
+  --foreground: oklch(0.25 0.02 240);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.02 240);
+  --primary: oklch(0.55 0.08 160);
+  --primary-foreground: oklch(0.97 0.015 80);
+  --muted: oklch(0.93 0.01 80);
+  --muted-foreground: oklch(0.50 0.02 240);
+  --border: oklch(0.88 0.015 80);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+
+  /* Mobile phone frame */
+  .phone-frame {
+    width: 100%;
+    max-width: 390px;
+    min-height: 100dvh;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background: var(--night-bg);
+  }
+
+  /* Sleep app specific components */
+  .sleep-card {
+    background: var(--night-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .sleep-card-2 {
+    background: var(--night-card-2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .moon-btn {
+    background: linear-gradient(135deg, #C9A66B, #E0C48A);
+    color: #101827;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 16px 32px;
+    width: 100%;
+    border: none;
+    transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 4px 20px rgba(201, 166, 107, 0.3);
+  }
+
+  .moon-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 10px rgba(201, 166, 107, 0.2);
+  }
+
+  .moon-btn-outline {
+    background: transparent;
+    color: #C9A66B;
+    border: 1px solid rgba(201, 166, 107, 0.4);
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 14px 28px;
+    width: 100%;
+    transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .moon-btn-outline:active {
+    transform: scale(0.97);
+    background: rgba(201, 166, 107, 0.1);
+  }
+
+  .status-card {
+    background: var(--night-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 18px;
+    padding: 16px 20px;
+    transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .status-card:active {
+    transform: scale(0.98);
+    border-color: rgba(201, 166, 107, 0.4);
+    background: rgba(201, 166, 107, 0.08);
+  }
+
+  .status-card.selected {
+    border-color: rgba(201, 166, 107, 0.6);
+    background: rgba(201, 166, 107, 0.1);
+  }
+
+  /* Page transition */
+  .page-enter {
+    animation: pageEnter 0.35s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+
+  @keyframes pageEnter {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Breathing animation for play button */
+  .breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(201, 166, 107, 0.3); }
+    50% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(201, 166, 107, 0); }
+  }
+
+  /* Stagger children */
+  .stagger > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger > *:nth-child(2) { animation-delay: 60ms; }
+  .stagger > *:nth-child(3) { animation-delay: 120ms; }
+  .stagger > *:nth-child(4) { animation-delay: 180ms; }
+  .stagger > *:nth-child(5) { animation-delay: 240ms; }
+
+  /* Progress bar */
+  .progress-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #C9A66B, #E0C48A);
+    border-radius: 100px;
+    transition: width 1s linear;
+  }
+
+  /* Night mode extreme dark */
+  .night-mode {
+    background: #060A12;
+  }
+
+  /* Morning card */
+  .morning-card {
+    background: #FFFDF8;
+    border: 1px solid rgba(40, 48, 68, 0.08);
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  /* Scrollbar hide */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
